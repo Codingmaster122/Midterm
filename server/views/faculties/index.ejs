@@ -1,14 +1,12 @@
 <% include ../partials/header.ejs %>
 
-<!-- MAIN CONTENT -->
 <div class="container">
   <div class="row">
     <div class="col-md-offset-1 col-md-10">
       <h3>Faculty Information</h3>
-
+     <!-- this creates and add button -->
       <a href="/faculties/add" class="btn btn-primary" role="button"
-        ><i class="fa fa-plus"></i> Add a faculty</a
-      >
+        ><i class="fa fa-plus"></i> Add a faculty</a>
 
       <br />
       <div class="table-responsive">
@@ -31,19 +29,27 @@
               <td class="text-center"><%= faculties[count].Department %></td>
               <td class="text-center"><%= faculties[count].Subject %></td>
 
-         
-                <td class="text-center ">
-                  <a href="books/<%= books[count]._id %>" class="btn btn-primary btn-sm"> <i class="fa fa-edit"></i>Edit</a>
-              </td>
-              <td class="text-center ">
-                <a href="books/delete/<%= books[count]._id %>" class="btn btn-danger btn-sm">
-                  <i class="fa fa-remove"></i>Delete</a>
-                </td>
-              </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
+            </td>
+            <!--This creates a edit button -->
+              <td class="text-center">
+                <a href="/faculties/details/<%= faculties[count]._id %>" class="btn btn-primary btn-sm">
+                  <i class="fas fa-edit"></i> Edit</a>
+                  </td>
+                    <!--This creates a Delete button -->
+                  <td class="text-center ">
+                    <a href="faculties/delete/<%= faculties[count]._id %>" class="btn btn-danger btn-sm">
+                      <i class="fa fa-remove"></i>Delete</a>
+                    </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <!-- ------------------------ -->
+      <!-- ADD the EDIT BUTTON HERE -->
+      <!-- ------------------------ -->
+
+
     </main>
 
       <div class="col-md-offset-1 col-md-10 text-center">
@@ -52,5 +58,4 @@
     </div>
   </div>
 </div>
-
 <% include ../partials/footer.ejs %>

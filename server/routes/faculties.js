@@ -1,4 +1,5 @@
 // modules required for routing
+//COMP229-F2022-MidTerm-301216298-START-010
 let express = require("express");
 let router = express.Router();
 let mongoose = require("mongoose");
@@ -36,16 +37,16 @@ router.post("/add", (req, res, next) => {
   /*****************
    * ADD CODE HERE *
    *****************/
-   const {Facultyid,Facultyname, Department, Subject} = req.body; // Extrapolating data from req.body
+   const {Facultyid,Facultyname,Department, Subject} = req.body; // Extrapolating data from req.body
 
-  const newfaculties = new faculties({
+  const newfaculties = new faculty({
     Facultyid,
     Facultyname,
     Department,
     Subject
   });
 
-  faculties.create(newfaculties, (err, faculties) => {
+  faculty.create(newfaculties, (err, faculty) => {
     if (err) res.end(err);
     else res.redirect("/faculties");
   });
@@ -54,38 +55,38 @@ router.post("/add", (req, res, next) => {
 
 
 // GET the faculty  Details page in order to edit an existing faculty
-router.get("/edit/:id", (req, res, next) => {
+router.get("/details/:id", (req, res, next) => {
   /*****************
    * ADD CODE HERE *
    *****************/
    let id = req.params.id;
-   faculties.findById(id, (err, facultiesToEdit) => {
+   faculty.findById(id, (err, facultiesToEdit) => {
      if (err) res.end(err);
      else {
-       res.render("facultiess/details", {
+       res.render("faculties/details", {
          title: "faculties",
-         facultiess: facultiesToEdit,
+         faculties: facultiesToEdit,
        });
      }
    });
  });
 
 // POST - process the information passed from the details form and update the document
-router.post("/edit/:id", (req, res, next) => {
+router.post("/details/:id", (req, res, next) => {
   /*****************
    * ADD CODE HERE *
    *****************/
    let id = req.params.id;
-  const {Title, Price, Author, Genre, Description} = req.body;
+  const {Facultyid, Facultyname, Department, Subject} = req.body;
 
-  const updatedfaculties = new faculties({
+const updatedfaculties = new faculty({
     _id: id,
     Facultyid,
     Facultyname,
     Department,
     Subject
   });
-  faculties.updateOne({_id: id}, updatedfaculties, (err) => {
+  faculty.updateOne({_id: id}, updatedfaculties, (err) => {
     if (err) {
       res.end(err);
     } else {
@@ -101,7 +102,7 @@ router.get("/delete/:id", (req, res, next) => {
    * ADD CODE HERE *
    *****************/
    let id = req.params.id;
-  faculties.deleteOne({_id: id}, (err) => {
+  faculty.deleteOne({_id: id}, (err) => {
     if (err) res.end(err);
     else res.redirect("/faculties");
   });
